@@ -3,6 +3,8 @@ from write_to_config import write_to_config
 from pca_and_clustering import dimensionality_reduction, k_means_clustering
 from create_new_playlists import create_playlists
 import pandas as pd
+import json
+
 
 username = 'vvsoftware'
 client_id = 'cd77ee1f13e74475bd5c63a793b13906'
@@ -24,6 +26,9 @@ def main():
     df['Clusters'] = k_means_pca.labels_
 
     create_playlists(n_clusters, df)
+
+    df.sort_values(by=['Clusters'], ascending=True)
+    df.to_csv("clustered_songs.csv")
 
 
 if __name__ == '__main__':
